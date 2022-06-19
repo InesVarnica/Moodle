@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block upisni_list %}
+
+<br>
+<div class="container">
+    <div class="card-header text-center">
+        <h2>Upisni list za {{korisnik.username}}</h2>
+        <div class="card-group text-left">
+            <div class="card border-light mb-3" style="max-width: 40rem;">
+                <div class="card-header">
+                    <h4>Lista predmeta</h4>
+                </div>
+                <div class="card-body">
+                    
+                    {% if korisnik.status == 'izv' %}
+                        {% regroup neupisani by predmet_neupisani.sem_izv as predmet_list%}
+                        <ul>
+                            {% for sem_izv in predmet_list %}
+                                <li>Semestar:{{ sem_izv.grouper }}
+                                    <ul>
+                                        {% for subject in sem_izv.list %}
+                                            <form  method="POST">
+                                                {% csrf_token %}
+                                                {{subject.predmet_neupisani.id}}
+                                                {{subject.predmet_neupisani.name}}
+                                                {{subject.predmet_neupisani.kod}}
+                                                <button class="btn btn-primary btn-sm" type="submit" name="neupisani" value="{{subject.predmet_neupisani.id}}">Add</button>
+                                            </form>
+                                            <br>
+
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            
+                            {% endfor %}
+                            </ul>
+                    {% else %}
+                        {% regroup neupisani by predmet_neupisani_red.sem_red as predmet_list %}
+                        <ul>
+                            {% for sem_red in predmet_list %}
+                                <li>Semestar:{{ sem_red.grouper }}
+                                    <ul>
+                                        {% for subject in sem_red.list %}
+                                            <form  method="POST">
+                                                {% csrf_token %}
+                                                {{subject.predmet_neupisani_red.id}}
+                                                {{subject.predmet_neupisani_red.name}}
+                                                {{subject.predmet_neupisani_red.kod}}
+                                                <button class="btn btn-primary btn-sm" type="submit" name="neupisani" value="{{subject.predmet_neupisani_red.id}}">Add</button>
+                                            </form>
+                                            <br>
+
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card border-light mb-3" style="max-width: 40rem;">
+                <div class="card-header">
+                    <h4>Upisani predmeti</h4>
+                </div>
+                <div class="card-body">
+
+                    {% if korisnik.status == 'izv' %}
+                        {% regroup upisani by subject.sem_izv as predmet_list %}
+                        <ul>
+                            {% for sem_izv in predmet_list %}
+                                <li>Semestar:{{ sem_izv.grouper }}
+                                    <ul>
+                                        {% for subject in sem_izv.list %}
+                                            <form  method="POST">
+                                                {% csrf_token %}
+                                                {{subject.subject.id}}
+                                                {{subject.subject.name}}
+                                                {{subject.subject.kod}}
+                                            {% if subject.status == 'Prosao' or subject.status == 'Izgubio potpis' %}
+                                                
+                                            {% else %}
+                                                <button class="btn btn-primary btn-sm" type="submit" name="upisani" value="{{subject.subject.id}}">Delete</button>
+                                            {% endif %}
+                                            </form>
+                                            <br>
+
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            
+                            {% endfor %}
+                            </ul>
+                    {% else %}
+                    {% regroup upisani by subject.sem_red as predmet_list %}
+                    <ul>
+                        
+                        {% for sem_red in predmet_list %}
+                            <li>Semestar:{{ sem_red.grouper }}
+                                <ul>
+                                    {% for sub in sem_red.list %}
+                                        <form  method="POST">
+                                            {% csrf_token %}
+                                            {{sub.subject.id}}
+                                            {{sub.subject.name}}
+                                            {{sub.subject.kod}}
+                                            {% if sub.status == 'Prosao' or sub.status == 'Izgubio potpis' %}
+                                                
+                                            {% else %}
+                                                <button class="btn btn-primary btn-sm" type="submit" name="upisani" value="{{sub.subject.id}}">Delete</button>
+                                            {% endif %}
+                                        </form>
+                                        <br>
+
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+{% endblock %}

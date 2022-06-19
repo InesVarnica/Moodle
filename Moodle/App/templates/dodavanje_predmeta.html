@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block predmet %}
+{% load crispy_forms_tags %}
+<br>
+<div class="container">
+    <form method="post">
+        <H2>Add subject</H2>
+            {{form|crispy }}
+            {% csrf_token%}
+            <input class="btn btn-primary btn-lg" type="submit" value="Add">
+    </form>
+</div>
+
+{% endblock %}

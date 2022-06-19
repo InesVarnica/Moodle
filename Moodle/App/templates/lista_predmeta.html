@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block predmeti %}
+<br>
+<div class="container">
+{% for subject in data %}
+    <div class="list-group-item">
+        {% csrf_token %}
+        {{subject.id}}
+        <a class="text-reset" href="{%url 'studenti_po_predmetu' subject.id %}">{{subject.name}} </a>
+        {{subject.kod}}
+        
+        <a class="btn btn-primary btn-sm" href="{% url 'confirm_deletion' subject.id %}">Delete</a>
+        <a class="btn btn-secondary btn-sm" href="{%url 'edit_predmet' subject.id %}">Edit</a>
+
+    </div>
+{% endfor %} 
+</div>
+{% endblock %}

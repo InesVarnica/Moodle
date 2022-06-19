@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block predmeti %}
+<br>
+<div class="container">
+    {% for student in data %}
+        <div class="list-group-item">
+            <a  href="{%url 'upisni_list' student.id %}" >{{student.username}}  </a> 
+            <a href="{% url 'edit' student.id %}" class="btn btn-light btn-sm " >  Ažuriraj korisnika</a>
+        </div>
+        <br>
+    {% endfor %} 
+</div>
+
+{% endblock %}

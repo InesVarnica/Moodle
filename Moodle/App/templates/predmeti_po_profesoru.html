@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block predmeti_po_profesoru %}
+<br>
+<div class="container">
+    {% for subject in data %}
+        <a class="list-group-item" href="{%url 'studenti_po_predmetu' subject.subject.id %}">{{subject.subject.name}} </a>
+        <br>
+    {% endfor %} 
+</div>
+{% endblock %}

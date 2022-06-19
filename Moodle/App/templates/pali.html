@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block pali %}
+<br>
+<div class="container">
+    <h4>{{pred.name}}</h4>
+    <br>
+    {% for student in data %}
+    <div class="list-group-item">
+        {{student.user.username }}
+        {{student.user.email }}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

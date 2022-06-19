@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block status %}
+{% load crispy_forms_tags %}
+<br>
+<div class="container">
+    <form method="post">
+                <table class="table-primary">
+                    <H2>Edit status</H2>
+                    {{form|crispy}}
+                    {% csrf_token %}
+                    
+                </table>
+                <input class="btn btn-primary" type="submit" name='Edit' value="Edit">
+    </form>
+</div>
+
+{% endblock %}

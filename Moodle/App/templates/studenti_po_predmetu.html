@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block studenti_po_predmetu %}
+<div class="container">
+    <br>
+    <h4>{{pred.name}}</h4>
+    <br>
+    {% for predmet in data %}
+        {%if predmet.user.role == 'stu' %}
+            
+            
+            <a class="list-group-item" href="{% url 'status' predmet.subject.id predmet.user.id %}"> {{predmet.user.username}} </a>
+        
+            
+            <br>
+        {% endif %}
+
+
+    {% endfor %} 
+    <br>
+    <br>
+
+{% if c_user.role == 'prof' %}
+<div class="btn-group-center" role="group" aria-label="Basic example">
+    <a class="btn btn-outline-dark" href="{%url 'polozili' subject_id %}">Studenti koji su polozili predmet </a>
+    <a class="btn btn-outline-dark" href="{%url 'imaju_potpis' subject_id %}">Studenti koji su dobili potpis, a nisu polozili predmet </a>
+    <a class="btn btn-outline-dark" href="{%url 'pali' subject_id %}">Studenti koji su pali predmet </a>
+</div>
+{% endif %}
+</div>
+{% endblock %}

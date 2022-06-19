@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block edit %}
+<br>
+<div class="container">
+    <form method="post">
+                    <H2>Edit user</H2>
+                        <label>Username:</label>
+                        {{form.username}} <br>
+                        <label>Email:</label>
+                        {{form.email}} <br>
+                        <label>Status:</label>
+                        {{form.status}} <br>
+                        <a class="btn btn-primary " href="{%url 'password' student_id %}" >Promijeni lozinku </a>
+                        <br><br>
+                    {% csrf_token %}
+                <input class="btn btn-primary " type="submit" value="Add">
+    </form>
+</div>
+
+{% endblock %}

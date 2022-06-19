@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block index %}
+<br>
+<div class="container">
+<h3>Welcome {{current_user.username}}</h3>
+<br>
+{% if current_user.is_staff %}
+
+<ul class="list-group">
+    <a href="{% url 'predmeti' %}" class="list-group-item">Lista svih predmeta</a><br>
+    <a href="{% url 'dodaj_predmet' %}" class="list-group-item">Dodaj novi predmet</a><br>
+    <a href="{% url 'studenti' %}" class="list-group-item">Lista studenata</a><br>
+    <a href="{% url 'profesori' %}" class="list-group-item">Lista profesora</a><br>
+    <a href="{% url 'register' %}" class="list-group-item">Dodaj novog korisnika</a><br>
+    
+
+{% endif %}
+{% if current_user.role == 'prof' %}
+    <a href="{% url 'predmeti_po_profesoru' %}" class="list-group-item">Vidi svoje predmete</a><br>
+    
+{% endif %}
+{% if current_user.role == 'stu' %}
+    <a href="{% url 'upisni_list' current_user.id %}" class="list-group-item">Vidi svoj upisni list</a><br>
+    
+{% endif %}
+</ul>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+        type="text/css"
+        href="{% static 'css/bootstrap.css' %}">
+    <title>Moodle</title>
+</head>
+<body>
+        <nav class="navbar navbar-light bg-light navbar-expand-lg">
+            <a class="navbar-brand" href="{%url 'index' %}">Home </a>
+            <a class="navbar-brand" href="{{ request.META.HTTP_REFERER }}">Return</a>
+            <a class="navbar-brand mr-sm-2" href="{% url 'logout' %}">Logout</a><br>
+            
+            
+        </nav>
+  
+  
+    {% block login %}
+    {% endblock %}
+    {% block index %}
+    {% endblock %}
+    {% block predmeti %}
+    {% endblock %}
+    {% block predmet %}
+    {% endblock %}
+    {% block student %}
+    {% endblock %}
+    {% block profesori %}
+    {% endblock %}
+    {% block upisni_list %}
+    {% endblock %}
+    {% block edit %}
+    {% endblock %}
+    {% block delete_director_confirmation %}
+    {% endblock %}
+    {% block studenti_po_predmetu %}
+    {% endblock %}
+    {% block predmeti_po_profesoru %}
+    {% endblock %}
+    {% block register %}
+    {% endblock %}
+    {% block status %}
+    {% endblock %}
+    {% block logout %}
+    {% endblock %}
+    {% block pali %}
+    {% endblock %}
+    {% block pass %}
+    {% endblock %}
+    {% block edit_predmet %}
+    {% endblock %}
+</body>
+</html>
